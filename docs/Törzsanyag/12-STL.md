@@ -44,7 +44,7 @@ for(int elem : x){
 
 Az `at()` tagfüggvény kivételt dob, ha túlindexeljük a tárolót, az indexelő operátor viszont nem.
 
-#### Fontosabb konstruktorok:
+#### Fontosabb konstruktorok
 
 Van egy konstruktora, amely egyetlen pozitív egészet vesz át, ezzel előre foglalható valamennyi elem. Az előre foglalt elemek előre default-constructolva lesznek.
 
