@@ -168,7 +168,7 @@ Az `std::find_if` 3. paraméterként egy érték helyett egy predikátumfüggvé
 
 Ugyan az, mint a `find` és `find_if`, csak összeszámolja a feltételt kielégítő elemeket.
 
-<https://godbolt.org/z/E17se46PG>
+[ Futtasd! ](<https://godbolt.org/z/E17se46PG>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -191,7 +191,7 @@ Az `std::fill` feltölti a kapott range-t egy adott értékkel.
 
 `void fill(ForwardIt first, ForwardIt last, const T& value);`
 
-<https://godbolt.org/z/7qbYq17v3>
+[ Futtasd! ](<https://godbolt.org/z/7qbYq17v3>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -211,8 +211,7 @@ Ezt egy generátor segítségével teszi, amely a harmadik paramétere. A gener�
 
 `void generate(ForwardIt first, ForwardIt last, Generator g);`
 
-Pl.
-<https://godbolt.org/z/Mz78oP4Wb>
+[ Futtasd! ](<https://godbolt.org/z/Mz78oP4Wb>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -251,7 +250,7 @@ Az `std::equal` megmondja, hogy két range minden eleme egyenlő -e.
 `bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2);`
 `bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPred p);`
 
-<https://godbolt.org/z/qsv57sPK5>
+[ Futtasd! ](<https://godbolt.org/z/qsv57sPK5>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -280,7 +279,7 @@ Opcionális negyedik paramétere egy predikátum, amely ha igazat ad vissza, mis
 
 Visszatérési értéke egy `std::pair`, amely a két rangen belül a különbségre mutató iterátorokat tartalmazza.
 
-<https://godbolt.org/z/hvdWTxqqr>
+[ Futtasd! ](<https://godbolt.org/z/hvdWTxqqr>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -315,7 +314,7 @@ Első két paramétere a domén range eleje és vége, a hardmadik paramétere a
 
 `OutputIt transform(InputIt first1, InputIt last1, OutputIt d_first, UnaryOp unary_op);`
 
-<https://godbolt.org/z/WKE977c8P>
+[ Futtasd! ](<https://godbolt.org/z/WKE977c8P>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
@@ -350,7 +349,7 @@ Az `std::transform`-nak létezik egy két range-n működő változata is:
 
 `OutputIt transform(InputIt1 first1, InputIt1 last1, InputIt2 first2, OutputIt d_first, BinaryOp binary_op);`
 
-<https://godbolt.org/z/q96zb98Ea>
+[ Futtasd! ](<https://godbolt.org/z/q96zb98Ea>){ .md-button target="_blank"}
 ```cpp
 #include <iostream>
 #include <vector>
