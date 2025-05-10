@@ -23,9 +23,9 @@ aktiváló kulcsokat elérni.
 
 A Visual Studio Installer program központosítva tud VS verziókat telepíteni és módosítnai. Ezt megnyitva, ha az "Installed" fülön még nincs ott a kívánt verzió(Visual Studio 2022), akkor ezt az "Available" fülről lehet telepíteni.<br>
 A felugró ablakból a tárgyhoz a "Desktop Development with C++" Workload-ra lesz csak szükség. Emellett az "Individual components" fülről ajánlott még a "C++ AddressSanitizer" komponens.<br>
-![alt text](image-7.png)
+![](./assets/vs/desktop-pack.png)
 <br>
-![alt text](image-8.png)
+![](./assets/vs/asan.png)
 
 
 
@@ -34,17 +34,17 @@ A felugró ablakból a tárgyhoz a "Desktop Development with C++" Workload-ra le
 Visual Studioban a fő struktúra a következő: A root egy "solution" amiben több project is lehet. Ez teszi lehetővé azt, hogy komplex programokat akár részenként is használhassunk.<br>
 Új projekt létrehozásához indítsuk el a Visual Studiot, majd kattintsunk a "Create a new project" gombra.<br>
 Ezután válasszuk az alábbi opciót:<br>
-![alt text](image-9.png)<br>
+![](./assets/vs/empty-project.png)<br>
 Ezután adunk egy nevet a projectnek, kiválasztjuk hogy hova kerüljön(egyetem mappa, stb.), valamint, ha nem szeretnénk hogy a project és a solution ugyanabban a mappában legyen(nagyobb projekteknél nem ajánlott), akkor adunk egy külön nevet a solutionnek is. 
 
-![alt text](image-11.png)
+![](./assets/vs/solution-explorer.png)
 
 A Solution Explorert, ha nem jelent meg, érdemes előhozni a View>Solution Explorer opcióval. Általában az ablak jobb oldalán jelenik meg, de személyes preferencia, hogy ki hova helyezi el.
 
 ## Ajánlott beállítások
 
 A Projektünk beállításait a "Solution Explorer"-ben a projektre jobbklikk>Properties -re kattintva érhetjük el.
-![alt text](image-6.png)
+![](./assets/vs/project-properties.png)
 
 ### Command Line opciók
 
@@ -72,7 +72,7 @@ int main(){
 ```
 
 Majd az `F5` billenytűt leütve letesztelhetjük, hogy műküdik -e a setupunk.<br>
-![alt text](image-10.png)
+![](./assets/vs/helloworld-running.png)
 
 A "Source Files", "Header Files" stb. nem valódi mappák, a Visual Studio "Filter"-nek nevezi őket, a fileok valójában mind ugyanabban a mappában vannak. Ez megsegíti a headerekkel való munkát.
 
@@ -82,21 +82,21 @@ Meglévő fileokat az új fileok létrehozásához hasonlóan tudunk létrehozni
 
 Töltsük le a <https://git.ik.bme.hu/Prog2/ell_feladat/CPPswap> oldalról a feladat alapját. Ezek a fileok közül a `.h` és `.cpp` fileokra lesz szükség. 
 
-![alt text](image-12.png)
+![](./assets/vs/git-clone.png)
 
 Hozzunk létre egy új Visual Studio projektet. 
 
-![alt text](image-16.png)
+![](./assets/vs/new-project.png)
 
 Másoljuk a fentebb említett fileokat a projekt mappájába (ahol a `.vcxproj` file van). Csak üres mappába hozzunk létre VS Projektet, aztán másoljuk be a szükséges fileokat.
 
-![alt text](image-17.png)
+![](./assets/vs/fileok.png)
 
 Ezután adjuk hozzá a fileokat a projekthez.
 
-![alt text](image-18.png)
+![](./assets/vs/existing-items.png)
 
-![alt text](image-19.png)
+![](./assets/vs/existing-items-2.png)
 
 Ezután futtassuk a projektet.
 
@@ -104,18 +104,18 @@ A Solution Explorerből keressük ki a `swap.cpp` filet és nyissuk meg.
 
 (A `#error` preprocesszor direktívával lehet szándékos fordításidejű hibát tenni a kódba hibaüzenettel együtt)
 
-![alt text](image-15.png)
+![](./assets/vs/preprocessor-error.png)
 
 #### Megjegyzés a laborfeladatokhoz:
 
 Néhány feladathoz jön Visual Studio projekt és solution file, alternatívaként ezek is használatók. Amikor a VS felajánlja, hogy upgradeljük a Windows SDK-t, akkor fogadjuk el a promptot. 
 
-![alt text](image-13.png)
+![](./assets/vs/solution-explorer.png)
 
-![alt text](image-14.png)
+![](./assets/vs/sdk-upgrade.png)
 
 ### Preprocessor makró definíciók megadása
 
 A Project Properties > C/C++ > Preprocessor menüpontban a "Preprocessor Definitions" pontosvesszővel ellátott listába lehet makrókat definiálni.
 
-![alt text](image-20.png)
+![](./assets/vs/preprocessor-definitions.png)
