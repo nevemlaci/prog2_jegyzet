@@ -121,7 +121,7 @@ int main(){
 }
 ```
 
-Az `std::ifstream` és `std::ofstream` típusó objektumok automatikusan (ld. [osztályok](./5-osztályok.md)) bezárják a fileokat, ha scopeon kívül kerülnek, így nem szükséges a fileokat manuálisan bezárni, viszont a lehetőségünk megvan rá. (`.close()`)
+Az `std::ifstream` és `std::ofstream` típusó objektumok automatikusan (ld. [osztályok](./6-osztalyok.md)) bezárják a fileokat, ha scopeon kívül kerülnek, így nem szükséges a fileokat manuálisan bezárni, viszont a lehetőségünk megvan rá. (`.close()`)
 
 ## IO manipulátorok
 `<ios>` és `<iomanip>` headerek
