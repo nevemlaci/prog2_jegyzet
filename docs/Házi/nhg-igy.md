@@ -16,7 +16,7 @@ A tárolókat érdemes az alábbiak alapján elkezdeni:
 * Lehessen bele elemeket beszúrni (ha a feladathoz kell, akkor megadott indexre)
 * Lehessen belőle elemeket törölni
 * Kezeljen minden memóriát, ne kelljen kívülről memóriát kezelni
-* Ha lista, vagy egyéb "Node" alapú tároló, akkor ezeket ne kelljen kívülről piszkálni
+* Ha lista, vagy egyéb "Node" alapú tároló, akkor ezeket a nodeokat ne kelljen kívülről piszkálni
 * Ha dinamikus tömb, akkor mindenképp lehessen indexelni (ez listánál lassú, inkább iterátorokkal legyen megoldva)
 * Lehessen iterátorokkal is lépkedni rajta, listánál főleg fontos
 
