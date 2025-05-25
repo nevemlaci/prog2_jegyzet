@@ -23,10 +23,11 @@ Komplex operator+(const Komplex& k1, const Komplex& k2){
     Komplex result;
     result.re = k1.re + k2.re;
     result.im = k1.im + k2.im;
+    return result;
 }
 
 int main(){
-    Komplex k1;
+    Komplex k1, k2;
     k1.re = 4;
     k1.im = 2;
     k2.re = 1;
