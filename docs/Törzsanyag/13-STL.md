@@ -130,6 +130,44 @@ std::vector<int> v{3, 1, 4};
 std::cout << "distance(first, last) = " << std::distance(v.begin(), v.end()) << '\n';
 ```
 
+#### std::for_each
+
+A legegyszerűbb algoritmus. A két kapott iterátor közt iterál és minden elemre lefuttatja a kapott funktort. Visszatérési értéke a funktor, amit paraméterként kapott.
+Pl.
+
+{{ run_button("https://godbolt.org/z/zGMcrzr8G") }}
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+template<typename T, int X>
+class CountBy{
+    T counter;
+
+    public:
+
+    CountBy(const T& init) : counter(init) {}
+
+    void operator()(const T& t){
+        counter += t * X;
+    }
+
+    const T& get() const {
+        return counter;
+    }
+};
+
+int main(){
+    std::vector<int> v = {1, 2, 3};
+    CountBy<int, 2> counter(0);
+    counter = std::for_each(v.begin(), v.end(), counter); // 1*2 + 2*2 + 3*2 = 12
+    std::cout << counter.get();
+}
+```
+
+
 #### std::find, std::find_if
 
 `InputIt find(InputIt first, InputIt last, const T& value);`
@@ -243,56 +281,6 @@ for(auto it = v.begin(), it != v.end(), ++it){
 }
 ```
 
-#### std::equal, std::mismatch
-
-Az `std::equal` megmondja, hogy két range minden eleme egyenlő -e.
-
-`bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2);`
-`bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPred p);`
-
-[ Futtasd! ](<https://godbolt.org/z/qsv57sPK5>){ .md-button target="_blank"}
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-int main(){
-    std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
-    std::vector<int> w = {1, 4, 3, 2, 1, 7, 8, 9, 14};
-    std::cout << std::boolalpha << std::equal(v.begin(), v.end(), w.begin(), w.end()) << '\n';
-    std::cout << std::boolalpha << std::equal(v.begin(), v.end(), v.begin(), v.end());
-}
-```
-
-Az `std::mismatch` megkeresi az első olyan pontot két range-ben, ahol eltérnek.
-Első három paramétere:
-
-* Első range eleje
-* Első range vége
-* Második range eleje
-
-Opcionális negyedik paramétere egy predikátum, amely ha igazat ad vissza, mismatch-nek számít az adott elempár.
-
-`std::pair<InputIt1, InputIt2> mismatch( InputIt1 first1, InputIt1 last1, InputIt2 first2);`
-
-`std::pair<InputIt1, InputIt2> mismatch(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPred p);`
-
-Visszatérési értéke egy `std::pair`, amely a két rangen belül a különbségre mutató iterátorokat tartalmazza.
-
-{{ run_button("https://godbolt.org/z/ahWYbqErv") }}
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-int main(){
-    std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
-    std::vector<int> w = {3, 2, 1, 5, 0, 2, 8, 0, 12};
-    
-    auto it_pair = std::mismatch(v.begin(), v.end(), w.begin());
-    std::cout << "Mismatch at: " << it_pair.first - v.begin();
-}
-```
 
 #### std::transform
 
@@ -349,11 +337,64 @@ int main(){
     std::vector<int> x(v.size());
 
     //std::plus<T> : funktor aminek a fgv.hívás operátora összeadja a két operandust
-    std::transform(v.begin(), v.end(), w.begin(), x.begin(), std::plus<int>()/*default constructed std::add instance*/);
+    std::transform(v.begin(), v.end(), w.begin(), x.begin(), std::plus<int>()/*default constructed std::plus instance*/);
     for(int elem : x){
         std::cout << elem << '\n';
     }
 }
 ```
+
+#### std::equal, std::mismatch
+
+Az `std::equal` megmondja, hogy két range minden eleme egyenlő -e.
+
+`bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2);`
+`bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPred p);`
+
+[ Futtasd! ](<https://godbolt.org/z/qsv57sPK5>){ .md-button target="_blank"}
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main(){
+    std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
+    std::vector<int> w = {1, 4, 3, 2, 1, 7, 8, 9, 14};
+    std::cout << std::boolalpha << std::equal(v.begin(), v.end(), w.begin(), w.end()) << '\n';
+    std::cout << std::boolalpha << std::equal(v.begin(), v.end(), v.begin(), v.end());
+}
+```
+
+Az `std::mismatch` megkeresi az első olyan pontot két range-ben, ahol eltérnek.
+Első három paramétere:
+
+* Első range eleje
+* Első range vége
+* Második range eleje
+
+Opcionális negyedik paramétere egy predikátum, amely ha igazat ad vissza, mismatch-nek számít az adott elempár.
+
+`std::pair<InputIt1, InputIt2> mismatch( InputIt1 first1, InputIt1 last1, InputIt2 first2);`
+
+`std::pair<InputIt1, InputIt2> mismatch(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPred p);`
+
+Visszatérési értéke egy `std::pair`, amely a két rangen belül a különbségre mutató iterátorokat tartalmazza.
+
+{{ run_button("https://godbolt.org/z/ahWYbqErv") }}
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main(){
+    std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
+    std::vector<int> w = {3, 2, 1, 5, 0, 2, 8, 0, 12};
+    
+    auto it_pair = std::mismatch(v.begin(), v.end(), w.begin());
+    std::cout << "Mismatch at: " << it_pair.first - v.begin();
+}
+```
+
+
 
 
