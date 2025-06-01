@@ -279,24 +279,11 @@ Opcionális negyedik paramétere egy predikátum, amely ha igazat ad vissza, mis
 
 Visszatérési értéke egy `std::pair`, amely a két rangen belül a különbségre mutató iterátorokat tartalmazza.
 
-[ Futtasd! ](<https://godbolt.org/z/hvdWTxqqr>){ .md-button target="_blank"}
+{{ run_button("https://godbolt.org/z/ahWYbqErv") }}
 ```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
-template<typename T> //template hogy mindenféle vektorhoz jó legyen
-struct transformer{
-    T elozo;
-    
-    transformer() : elozo(0) {}
-
-    T operator()(const T& elem){
-        int eredmeny = elem + elozo;
-        elozo = elem;
-        return eredmeny;
-    }
-};
 
 int main(){
     std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};

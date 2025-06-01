@@ -31,3 +31,4 @@ plugins:
    - tags:
       enabled: true
       tags: true
+   - macros
