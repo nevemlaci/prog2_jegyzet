@@ -108,7 +108,7 @@ Gyakori kérdés: hogyan alakul a publikus, protected és privát tagok láthat�
 Tegyük fel, hogy a hallgatók dekorált nevéhez hozzá szeretnénk adni, hogy "hallgató". Ehhez valahogyan "felül kell írnunk" a base class `get_decorated_name` függvényét. Azokat a függvényeket amelyeket felül lehet írni virtuális tagfüggvényeknek hívunk és a `virtual` keyworddel jelezzük őket. 
 A base class-ra mutató pointeren keresztül tárolt subbclassnak a saját tagfüggvény verziója hívódik majd.
 
-Az `ovverride` keyword opcionálisan a felülíró függvény fejléce után kerül, hasznos kiírni.
+Az `override` keyword opcionálisan a felülíró függvény fejléce után kerül, hasznos kiírni.
 
 [ Futtasd! ](<https://godbolt.org/z/j7a3jW9fP>){ .md-button target="_blank"}
 ```cpp
