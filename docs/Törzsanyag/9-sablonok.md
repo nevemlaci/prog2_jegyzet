@@ -1,7 +1,7 @@
 # Sablonok (template)
 
 !!! warning
-    Ez az oldal erősen work in progress!!!
+    A sablon téma a jegyzetben átdolgozás alatt áll!
 
 ## Sablon alapok
 A C++ egyik legnagyobb előnye a C-vel szemben a generikus programozási lehetőségekben rejlik. A jegyzetben már szerepelt az alábbi függvény:
@@ -16,7 +16,8 @@ void cpp_swap(int& x, int& y){
 }
 ```
 
-Ezt a függvényt szeretnénk megírni, hogy működjön mindenféle típusra. Természetesen ez lehetetlen küldetésnek tűnhet, azonban a C++ templatek fő felhasználási módja éppen ez.
+Ezt a függvényt szeretnénk megírni, hogy működjön mindenféle típusra. Természetesen ez C tudással lehetetlen küldetésnek tűnhet, 
+azonban a C++ templatek fő felhasználási módja éppen ez.
 
 
 <https://godbolt.org/z/rrzMjYvK7>
@@ -56,13 +57,18 @@ cpp_swap<int>(x, y); //cpp_swap<T> függvénysablon példányosítása T=int sab
 ```
 esetén a
 ```cpp
-void cpp_swap(int& x, int& y){ 
+void cpp_swap_int(int& x, int& y){ 
     int tmp = x;
     x = y;
     y = tmp;
 }
 ```
 kód generálódik. A `T` helyére mindenhol `int` kerül. Ezt a generált kódot nekük természetesen nem kell látnunk, vagy foglalkoznunk vele.
+
+!!! warning
+
+    A függvény neve nem garantáltan `cpp_swap_int` lesz, ennek a névnek eldöntése a fordító dolgam nekünk ezzel nem kell foglalkozni,
+    csak példaként van itt.
 
 A sablonparamétereket a fordító néha le tudja vezetni a kapott függvényparaméterekből (template parameter deduction).
 
@@ -74,8 +80,6 @@ cpp_swap(a, b); //nem kell megadni, hogy double típus, mivel a és b double tí
 
 cpp_swap<double>(a, x); //meg kell adni, hogy double típus, mivel a és x különböző típusúak, így a fordító nem tud dönteni
 ```
-
-A sablonok (template) használata nagyon elterjedt a C++ programozásban, ezért néhány standard library implementáció gyakran Standard Template Library (STL) -nek nevezi magát (pl. MSVC STL, EA Games STL).
 
 ## Duck typing
 
@@ -99,9 +103,56 @@ Hát azokra, amelyek ezeket a feltételeket teljesítik:
 
 *Vegyük észre*: ezek pontosan azok a feltételek, amelyek ahhoz kellenek, hogy a kódban az adott típust T helyére beillesztve a kód leforduljon.
 
+!!! note
+
+    Természetesen ezeken a feltételeken lazíthatnánk, ha érték helyett konstans referenciaként vennénk át a paramétereket.
+
 A sablonok korlátozására léteznek további technikák (SFINAE, concept), azonban ezek messze túlmutatnak a tárgy anyagán.
 
-## Nem-típus sablonparaméterek, nem-függvény sablonok
+## Részleges specializáció
+
+Tegyük fel, hogy szeretnénk ha egy adott sablon egy speciális módon működjön, ha egy adott típust kap. 
+Például ha a swap függvényünk int-et kap, akkor írja ki, hogy "int", különben működjön normális módon.
+
+<https://godbolt.org/z/zj1bfe5s9>
+```cpp
+template <typename T> 
+void cpp_swap(T& x, T&y){ 
+    T tmp = x;
+    x = y;
+    y = tmp;
+}
+
+template <> 
+void cpp_swap<int>(int& x, int&y){ //specializáció a T=int esetre
+    std::cout << "int ";
+    int tmp = x;
+    x = y;
+    y = tmp;
+}
+```
+
+## Osztálysablonok
+Mint ahogyan a függvényekhez, az osztályokhoz is lehet sablonokat készítnei. 
+pl.
+```cpp
+template <typename T>
+class Foo{
+public:
+    T x;
+};
+```
+Nagyon hasonlóan működik a függvényparaméterekhez, szimpla kódgenerálásról van szó. 
+Ugynúgy működik velük a specializáció, valamint létezik a függvényeknél ismert sablonparaméter levezetés is,
+ezt **C**lass **T**emplate **A**rgument **D**eduction (CTAD) -nek nevezik. 
+
+!!! note
+
+    A CTAD kicsit máshogy működik, mint az általános, függvényekre vonatkozó TAD. 
+    Akit érdekel, annak ajánlom [Nina Ranns cppcon előadását a témával kapcsolatban](https://www.youtube.com/watch?v=pcroTezEbX8).
+
+
+## Nem-típus sablonparaméterek
 
 Sablonparaméterként átadható nem csak típus, hanem gyakorlatilag bármilyen más objektum is. Pl. a standard library egy típusa az `std::array`, amely első függvényparamétere a tömbben tárolt típus, második függvényparamétere egy pozitív egész szám, a tömb mérete.
 
@@ -128,26 +179,4 @@ pl.
 print_template_int<5>(); //ok
 int x = 5;
 print_template_int<x>(); //hiba, x nem fordításidejű konstans(const int x sem oldaná meg)
-```
-## Részleges specializáció
-
-Tegyük fel, hogy szeretnénk ha egy adott sablon egy speciális módon működjön, ha egy adott típust kap. 
-Például ha a swap függvényünk int-et kap, akkor írja ki, hogy "int", különben működjön normális módon.
-
-<https://godbolt.org/z/zj1bfe5s9>
-```cpp
-template <typename T> 
-void cpp_swap(T& x, T&y){ 
-    T tmp = x;
-    x = y;
-    y = tmp;
-}
-
-template <> 
-void cpp_swap<int>(int& x, int&y){ //specializáció a T=int esetre
-    std::cout << "int ";
-    int tmp = x;
-    x = y;
-    y = tmp;
-}
 ```

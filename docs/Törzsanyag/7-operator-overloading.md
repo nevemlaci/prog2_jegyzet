@@ -2,7 +2,7 @@
 
 ## Operátorok és osztályok
 
-Ha egy operátor az adott osztály típust veszi át baloldali paraméterként (vagy unáris, egyparaméterű operátor), akkor az operátort az osztályon belül tagfüggvényként kezelhetjük. Ekkor valójában egy paramétert adunk neki, ami a jobb oldali operandus. A bal oldali operandusa implicit a `this` pointer lesz.
+Ha egy operátor az adott osztály típust veszi át baloldali paraméterként (vagy unáris, egyparaméterű operátor), akkor az operátort az osztályon belül tagfüggvényként kezelhetjük. Ekkor az első ("bal oldali") paramétere automatikusan a `this` pointer lesz.
 
 ### Copy assignment(értékadó operátor)
 
@@ -10,10 +10,10 @@ Vannak olyan esetek, amikor már egy kész objektumnak akarunk új értéket adn
 Pl.
 
 ```cpp
-tomb<int> tomb1;
+DinTomb tomb1;
 tomb1.push_back(5);
 
-tomb<int> tomb2;
+DinTomb tomb2;
 tomb2.push_back(1);
 
 tomb1 = tomb2;
@@ -25,9 +25,9 @@ A másoló konstruktor testvére a copy assignment(értékadó) operator. A copy
 Fontos, hogy a copy assignment operátor nem új objektumot hoz létre így az előzőleg használt erőforrásokat fel kell szabadítani.
 
 ```cpp
-template <typename T>
+
 class DinTomb{
-    T* tomb;
+    int* tomb;
     std::size_t meret;
 
 public:
@@ -41,8 +41,7 @@ public:
      * @brief Másoló konstruktor
      * @param other a másik tömb amit másolunk
      */
-    DinTomb(const DinTomb& other) : tomb(other.tomb != nullptr ? new T[other.meret] : nullptr), meret(other.meret) {
-        //                                          ^ ha nullptr a másik tömb(vagy 0 a mérete), akkor nem foglalunk 0 méretű tömböt(nem is lehetne...)
+    DinTomb(const DinTomb& other) : tomb(other.tomb != nullptr ? new int[other.meret] : nullptr), meret(other.meret) {
         for(std::size_t i = 0; i < other.meret; ++i){
             tomb[i] = other.tomb[i];
         }
@@ -58,7 +57,7 @@ public:
             return *this; // *this -> this: pointer, akkor *this referencia(az objektumra amin a hívás történt)
         }
         delete[] tomb;
-        tomb = new T[other.meret];
+        tomb = new int[other.meret];
         meret = other.meret;
         for(std::size_t i = 0; i < other.meret; ++i) {
             tomb[i] = other.tomb[i];
@@ -69,14 +68,6 @@ public:
     ~DinTomb() {
         delete[] tomb;
     }
-
-    std::size_t size() const;
-
-    void push_back(const T& elem);
-
-    T& at(std::size_t idx);
-
-    T& at(std::size_t idx) const;
 };
 
 int main(){

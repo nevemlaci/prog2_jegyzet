@@ -177,18 +177,6 @@ int main(){
 }
 ```
 
-## Osztálysablonok
-Mint ahogyan a függvényekhez, az osztályokhoz is lehet sablonokat készítnei. 
-pl.
-```cpp
-template <typename T>
-class Foo{
-public:
-    T x;
-};
-```
-Nagyon hasonlóan működik a függvényparaméterekhez, szimpla kódgenerálásról van szó.
-
 ## Gyakori félreértések, static tagfüggvények
 
 *adatbázisok referencia következik*
@@ -302,23 +290,21 @@ struct Tarolo{
 ```
 
 Most a tároló a hívó féltől már egy pointert kap, viszont **átveszi a felelősséget** a memória kezelése felet. Ezt a technikát alkalmazzuk pl. heterogén kollekcióknál
+
 ## Komolyabb osztály példa
 
-Most pedig nézzünk egy komolyabb RAII példát. 
-A tervünk egy dinamikusan növő tömb osztálysablon létrehozása ami bármilyen lemásolható típust képes tárolni.
-Ezt a példát sokáig fogjuk használni.
+Most pedig nézzünk egy komolyabb példát. 
+A tervünk egy dinamikusan növő tömb osztálysablon létrehozása egész számokat fog tárolni.
 
-Szóval szükségünk lesz egy `typename T` sablonparaméterre, egy pointerre, ami a tömbre mutat, valamint tárolni kell a tömb méretét.
-
-[ Futtasd! ](<https://godbolt.org/z/dM9zExWKr>){ .md-button target="_blank"}
+[ Futtasd! ](<https://godbolt.org/z/Y6jW9xM63>){ .md-button target="_blank"}
 ```cpp
-#include <cstddef>
-#include <stdexcept>
-#include <iostream>
+#include <cstddef> // std::size_t
+#include <stdexcept> // std::out_of_range
+#include <iostream> // std::cout
 
-template <typename T>
+
 class DinTomb{
-    T* tomb; //pointer a dinamikus tömbre
+    int* tomb; //pointer a dinamikus tömbre
     std::size_t meret; //a dinamikus tömb mérete
 
 public:
@@ -329,10 +315,10 @@ public:
 
     /**
      * @brief hozzáad egy új elemet a tömb végéhez. Nagyon hasonlít a C-ben megismert algoritmushoz, csak malloc-free helyett new-delete[] van
-     * @param elem az elem amit hozzáadunk (lemásolható kell, hogy legyen)
+     * @param elem az elem amit hozzáadunk(lemásolható kell, hogy legyen)
      */
-    void push_back(const T& elem) {
-        T* uj_tomb = new T[meret + 1];
+    void push_back(int elem) {
+        int* uj_tomb = new int[meret + 1];
         for(std::size_t i = 0; i < meret; ++i){
             uj_tomb[i] = tomb[i];
         }
@@ -350,7 +336,7 @@ public:
      * @return referencia az adott indexen lévő elemre
      * @throw std::out_of_range, ha túlindexelés történik
      */
-    T& at(std::size_t idx) {
+    int& at(std::size_t idx) {
         if(idx >= meret) {
             throw std::out_of_range("Tomb tulindexelve!");
         }
@@ -358,7 +344,7 @@ public:
     }
 
     //ua. mint az előbb, csak konstans verzió
-    const T& at(std::size_t idx) const { 
+    const int& at(std::size_t idx) const { 
         if(idx >= meret) {
             throw std::out_of_range("Tomb tulindexelve!");
         }
@@ -371,19 +357,23 @@ public:
 };
 
 int main(){
-    DinTomb<double> tomb; //valos szamokat tartalmazo dinamikus tomb
+    DinTomb tomb; 
 
-    tomb.push_back(4.3);
-    tomb.push_back(3.2);
-    tomb.at(0) = 5.8; //függvény az egyenlőség bal oldalán, mivel referenciát ad vissza!
+    tomb.push_back(4);
+    tomb.push_back(3);
+    tomb.at(0) = 5; //függvény az egyenlőség bal oldalán, mivel referenciát ad vissza!
     std::cout << tomb.at(1);
-    return 0; // nem kell semmi manuális memóriakezelés, mert a destruktor automatikusan felszabadítja amit kell, mert egyszer megírtuk
+    return 0; 
+    /*
+    nem kell semmi manuális memóriakezelés, 
+    mert a destruktor automatikusan felszabadítja amit kell, mert egyszer megírtuk
+    */
 }
 ```
 
-Nos igen, ez a RAII lényege. Nem kell manuálisan sehol `delete` és `new` -t írnunk az osztályt használó kódban, ha szépen becsomagoltuk a memóriakezelést egy osztályba. Az erőforráskezelést elabsztraktáltuk a felsőbb szintű kód elől, így ezt a tömb osztályt használva már nem kell a memóriakezeléssel foglalkoznunk.
+Nos igen, ez a RAII (avagy Scope Based Resource Management) lényege. Nem kell manuálisan sehol `delete` és `new` -t írnunk az osztályt használó kódban, ha szépen becsomagoltuk a memóriakezelést egy osztályba. Az erőforráskezelést elabsztraktáltuk a felsőbb szintű kód elől, így ezt a tömb osztályt használva már nem kell a memóriakezeléssel foglalkoznunk.
 
-Jó RAII példák a már megismert filestream osztályok. A konstruktorukban megnyitják a filet (elkérik a file handle-t az OS-től), majd a destruktorukban automatikusan bezárják a file-t.
+Jó RAII példák a már megismert filestream osztályok. A konstruktorukban megnyitják a filet (elkérik a file handle-t az OS-től), majd a destruktorukban automatikusan bezárják a file-t (elengedik a file handlet).
 
 ## Objektumok másolása
 
@@ -404,12 +394,13 @@ A copy constructor paramétereként `const T&` -et vesz át. Persze, hiszen a m�
 Ha például az osztályunk egy dinamikusan növő tömböt kezel, nem másolhatjuk le egyszerűen a tömbre mutató pointert, hanem a tömböt elemenként le kell másolni (deep copy).
 Ennek oka az, hogy a pointer lemásolásával (shallow copy, ez a default) az egyik tömb destruktora felszabadítja mindkét tömböt. <https://en.wikipedia.org/wiki/Object_copying>
 
-***FONTOS!*** Néhány olvasó esetleg ismerheti a `memcpy` függvényt. C++ objektumokat `memcpy`-vel (és `std::memcpy`-vel) másolni óriási hiba, mivel ilyenkor nem hívódnak meg az objektumok másoló konstruktorai!
+!!! danger "Fontos!"
+
+    Néhány olvasó esetleg ismerheti a `memcpy` függvényt. C++ objektumokat `memcpy`-vel (és `std::memcpy`-vel) másolni óriási hiba, mivel ilyenkor nem hívódnak meg az objektumok másoló konstruktorai!
 
 ```cpp
-template <typename T>
 class DinTomb{
-    T* tomb; //pointer a dinamikus tömbre
+    int* tomb; //pointer a dinamikus tömbre
     std::size_t meret; //a dinamikus tömb mérete
 
 public:
@@ -422,10 +413,9 @@ public:
      * @brief Másoló konstruktor
      * @param other a másik tömb amit másolunk
      */
-    DinTomb(const DinTomb& other) : tomb(other.tomb != nullptr ? new T[other.meret] : nullptr), meret(other.meret) {
-        //                                          ^ ha nullptr a másik tömb (vagy 0 a mérete), akkor nem foglalunk 0 méretű tömböt (nem is lehetne...)
+    DinTomb(const DinTomb& other) : tomb(other.tomb != nullptr ? new int[other.meret] : nullptr), meret(other.meret) {
         for(std::size_t i = 0; i < other.meret; ++i){
-            tomb[i] = other.tomb[i];
+            tomb[i] = other.tomb[i]; //elemenként lemásoljuk a régi tömböt az újba
         }
     }
 
@@ -455,17 +445,29 @@ class foo{
     static void something();
 
 
-    template <typename T>
+    template <typename T> // template definíciót headerbe!
     void print_with_x(T thing) const {
         std::cout << x << ' ' << thing;
     }
 };
 ```
 
-***FONTOS!*** A template definíciókat (explicit specializációkat kivéve) header fileokban kell megírni!
+!!! danger "Figyelem!"
+    
+    A template definíciókat (explicit specializációkat kivéve) header fileokban kell megírni!
+
+    A miértjéről az alábbi (egyébként szintén általam írt) rövid article-ben olvashattok:
+    [TCCPP Article](https://github.com/TCCPP/wiki/blob/60d51923ed1100c2ed76e68ece7f2a33db68bc46/articles/template-header.md)
 
 A .cpp fileban a `returntype classname::functionname(params...)` szintaktikát használjuk.<br>
-Statikus tagváltozókat itt kell definiálni, itt a `type classname::variablename = somevalue;` szintaktikát használjuk. Osztálydefiníción kívül a `static` mást jelent, így kiírni nagy hiba.
+
+!!! note 
+
+    Ezt azért így kell, mert a tagfüggvények valódi neve `classname::functionname`, azaz igazából ez semmi extra,
+    ugyanazt kell csinálni, mint C-ben.
+
+A statikus tagváltozókat is itt kell definiálni, itt a `type classname::variablename = somevalue;` szintaktikát használjuk. Osztálydefiníción kívül a `static` mást jelent, így kiírni nagy hiba.
+
 `foo.cpp`
 ```cpp
 
@@ -477,7 +479,8 @@ void foo::set_x(int x){
     this->x = x;
 }
 
-int foo::get_x() const { //fontos! a const része a függvény fejécének(signature), itt is ki kell írni.
+//fontos! a const része a függvény fejécének(signature), itt is ki kell írni.
+int foo::get_x() const { 
     return x;
 }
 
@@ -485,8 +488,10 @@ void foo::something(){
     y*=2;
 }
 ```
+<!--
 
-#### *std::initializer_list*
+
+## *std::initializer_list* (Extra)
 <https://en.cppreference.com/w/cpp/utility/initializer_list>
 
 `<initializer_list>` header
@@ -524,3 +529,4 @@ int main(){
     DinTomb<int> tomb = {1, 2, 3, 4};
 }
 ```
+-->
