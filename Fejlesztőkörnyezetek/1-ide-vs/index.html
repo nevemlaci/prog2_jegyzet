@@ -1,0 +1,1206 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../T%C3%B6rzsanyag/13-STL/">
+      
+      
+        <link rel="next" href="../2-ide-clion/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Visual Studio - C++ Jegyzet - Lipódi László</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#visual-studio" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="C++ Jegyzet - Lipódi László" class="md-header__button md-logo" aria-label="C++ Jegyzet - Lipódi László" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            C++ Jegyzet - Lipódi László
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Visual Studio
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="C++ Jegyzet - Lipódi László" class="md-nav__button md-logo" aria-label="C++ Jegyzet - Lipódi László" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    C++ Jegyzet - Lipódi László
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Törzsanyag
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Törzsanyag
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/1-alapveto-kulonbsegek/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alapvető különbségek a C nyelvtől
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/2-standard-io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Standard IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/3-kivetelek/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kivételek, hibakezelés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/4-dinamikus-memoriakezeles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dinamikus memóriakezelés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/5-operator_no_class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operator overloading - Osztályok nélkül
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/6-osztalyok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Osztályok, objektumok
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/7-operator-overloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operátorok újra, bővebben
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/8-inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Objektumorientált idióma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/9-sablonok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sablonok (template)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/10-heterogen_kollekcio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heterogén tárolók
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/11-iteratorok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterátorok
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/12-predik%C3%A1tumok-funktorok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Predikátumok
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../T%C3%B6rzsanyag/13-STL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A C++ Standard Library
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fejlesztőkörnyezetek
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fejlesztőkörnyezetek
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Visual Studio
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Visual Studio
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ajanlott-platformok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajánlott platformok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-community-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Community Edition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-enterprise-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Enterprise Edition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telepites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Telepítés
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projekt-letrehozasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projekt létrehozása
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajanlott-beallitasok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajánlott beállítások
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajánlott beállítások">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-opciok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Line opciók
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hello World!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cppswap-feladat-beallitasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPPSwap feladat beállítása
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPPSwap feladat beállítása">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#megjegyzes-a-laborfeladatokhoz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Megjegyzés a laborfeladatokhoz:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preprocessor-makro-definiciok-megadasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessor makró definíciók megadása
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-ide-clion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-ide-cmake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CMake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nagyházi
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Nagyházi
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../H%C3%A1zi/nhf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Házi feladat tippek
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../H%C3%A1zi/nhg-igy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nagyházi tervezés, avagy így írjunk nagyházit.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ajanlott-platformok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajánlott platformok
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-community-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Community Edition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-enterprise-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Enterprise Edition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telepites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Telepítés
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projekt-letrehozasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projekt létrehozása
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajanlott-beallitasok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajánlott beállítások
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajánlott beállítások">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-opciok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Line opciók
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hello World!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cppswap-feladat-beallitasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPPSwap feladat beállítása
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPPSwap feladat beállítása">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#megjegyzes-a-laborfeladatokhoz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Megjegyzés a laborfeladatokhoz:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preprocessor-makro-definiciok-megadasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessor makró definíciók megadása
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="visual-studio">Visual Studio</h1>
+<p>A Visual Studio a Microsoft fejlesztőkörnyezete, beépített devkitekkel, debuggerrel, profilerrel és egyéb finom dolgokkal. Works out of the box, nem bonyolult a setup. Hátránya, hogy Windows rendszeren kívül nem 
+létezik a Windowson használható verziója.</p>
+<p><strong><em>Nem összekeverendő a Visual Studio Code -al.</em></strong></p>
+<h2 id="ajanlott-platformok">Ajánlott platformok</h2>
+<p>Windows</p>
+<h2 id="vs-community-edition">VS Community Edition</h2>
+<p>A Visual Studio Community Edition teljesen ingyenesen letölthető a <a href="https://visualstudio.microsoft.com/free-developer-offers/">https://visualstudio.microsoft.com/free-developer-offers/</a> linkről. Fontos, hogy a bal oldali, "Visual Studio Community" opciót válasszuk,
+a Visual Studio Code egy teljesen más szoftver.</p>
+<h2 id="vs-enterprise-edition">VS Enterprise Edition</h2>
+<p>Egyetemistaként elérhető ingyenes licensz a Visual Studio Enterprise verziójához. Ehhez először, ha még nem tetted meg, a <a href="https://login.bme.hu/admin/username/">https://login.bme.hu/admin/username/</a> oldalon kell beállíts egy Office 365 emailt.
+Ebbe az emailbe egyébként Outlook-on keresztül egyszerűen be tudsz lépni. Ezután a <a href="https://azureforeducation.microsoft.com/devtools">https://azureforeducation.microsoft.com/devtools</a> oldalon ezzel a fiókkal belépve tudod a VS és más hasznos(pl. Windows) 
+aktiváló kulcsokat elérni.</p>
+<h2 id="telepites">Telepítés</h2>
+<p>A Visual Studio Installer program központosítva tud VS verziókat telepíteni és módosítnai. Ezt megnyitva, ha az "Installed" fülön még nincs ott a kívánt verzió(Visual Studio 2022), akkor ezt az "Available" fülről lehet telepíteni.<br>
+A felugró ablakból a tárgyhoz a "Desktop Development with C++" Workload-ra lesz csak szükség. Emellett az "Individual components" fülről ajánlott még a "C++ AddressSanitizer" komponens.<br>
+<img alt="" src="../assets/vs/desktop-pack.png" />
+<br>
+<img alt="" src="../assets/vs/asan.png" /></p>
+<h2 id="projekt-letrehozasa">Projekt létrehozása</h2>
+<p>Visual Studioban a fő struktúra a következő: A root egy "solution" amiben több project is lehet. Ez teszi lehetővé azt, hogy komplex programokat akár részenként is használhassunk.<br>
+Új projekt létrehozásához indítsuk el a Visual Studiot, majd kattintsunk a "Create a new project" gombra.<br>
+Ezután válasszuk az alábbi opciót:<br>
+<img alt="" src="../assets/vs/empty-project.png" /><br>
+Ezután adunk egy nevet a projectnek, kiválasztjuk hogy hova kerüljön(egyetem mappa, stb.), valamint, ha nem szeretnénk hogy a project és a solution ugyanabban a mappában legyen(nagyobb projekteknél nem ajánlott), akkor adunk egy külön nevet a solutionnek is. </p>
+<p><img alt="" src="../assets/vs/solution-explorer.png" /></p>
+<p>A Solution Explorert, ha nem jelent meg, érdemes előhozni a View&gt;Solution Explorer opcióval. Általában az ablak jobb oldalán jelenik meg, de személyes preferencia, hogy ki hova helyezi el.</p>
+<h2 id="ajanlott-beallitasok">Ajánlott beállítások</h2>
+<p>A Projektünk beállításait a "Solution Explorer"-ben a projektre jobbklikk&gt;Properties -re kattintva érhetjük el.
+<img alt="" src="../assets/vs/project-properties.png" /></p>
+<h3 id="command-line-opciok">Command Line opciók</h3>
+<p>A Project Properties -en belül a C/C++&gt;Command Line fülön az "Additional Options" részbe tudunk command line flageket írni.</p>
+<p>Ajánlott flagek:</p>
+<ul>
+<li><code>/Wall</code></li>
+<li><code>/WX</code> (ez a <code>Werror</code> megfelelője)</li>
+<li><code>/permissive-</code></li>
+<li><code>/fsanitize=address</code></li>
+</ul>
+<h2 id="hello-world">Hello World!</h2>
+<p>Hozzunk létre egy új file-t <code>main.cpp</code> néven. Ezt a Solution Explorer-ben a "Source Files"-re jobb kattintva <code>Add&gt;New item...&gt;C++ file</code> opciókkal tehetjük meg.</p>
+<p>A <code>main.cpp</code> fileba az alábbi kódrészletet illesztve:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>Majd az <code>F5</code> billenytűt leütve letesztelhetjük, hogy műküdik -e a setupunk.<br>
+<img alt="" src="../assets/vs/helloworld-running.png" /></p>
+<p>A "Source Files", "Header Files" stb. nem valódi mappák, a Visual Studio "Filter"-nek nevezi őket, a fileok valójában mind ugyanabban a mappában vannak. Ez megsegíti a headerekkel való munkát.</p>
+<p>Meglévő fileokat az új fileok létrehozásához hasonlóan tudunk létrehozni, a <code>New item...</code> helyett az <code>Existing item...</code> menüpontot kell választanunk.</p>
+<h2 id="cppswap-feladat-beallitasa">CPPSwap feladat beállítása</h2>
+<p>Töltsük le a <a href="https://git.ik.bme.hu/Prog2/ell_feladat/CPPswap">https://git.ik.bme.hu/Prog2/ell_feladat/CPPswap</a> oldalról a feladat alapját. Ezek a fileok közül a <code>.h</code> és <code>.cpp</code> fileokra lesz szükség. </p>
+<p><img alt="" src="../assets/vs/git-clone.png" /></p>
+<p>Hozzunk létre egy új Visual Studio projektet. </p>
+<p><img alt="" src="../assets/vs/new-project.png" /></p>
+<p>Másoljuk a fentebb említett fileokat a projekt mappájába (ahol a <code>.vcxproj</code> file van). Csak üres mappába hozzunk létre VS Projektet, aztán másoljuk be a szükséges fileokat.</p>
+<p><img alt="" src="../assets/vs/fileok.png" /></p>
+<p>Ezután adjuk hozzá a fileokat a projekthez.</p>
+<p><img alt="" src="../assets/vs/existing-items.png" /></p>
+<p><img alt="" src="../assets/vs/existing-items-2.png" /></p>
+<p>Ezután futtassuk a projektet.</p>
+<p>A Solution Explorerből keressük ki a <code>swap.cpp</code> filet és nyissuk meg.</p>
+<p>(A <code>#error</code> preprocesszor direktívával lehet szándékos fordításidejű hibát tenni a kódba hibaüzenettel együtt)</p>
+<p><img alt="" src="../assets/vs/preprocessor-error.png" /></p>
+<h4 id="megjegyzes-a-laborfeladatokhoz">Megjegyzés a laborfeladatokhoz:</h4>
+<p>Néhány feladathoz jön Visual Studio projekt és solution file, alternatívaként ezek is használatók. Amikor a VS felajánlja, hogy upgradeljük a Windows SDK-t, akkor fogadjuk el a promptot. </p>
+<p><img alt="" src="../assets/vs/solution-explorer.png" /></p>
+<p><img alt="" src="../assets/vs/sdk-upgrade.png" /></p>
+<h3 id="preprocessor-makro-definiciok-megadasa">Preprocessor makró definíciók megadása</h3>
+<p>A Project Properties &gt; C/C++ &gt; Preprocessor menüpontban a "Preprocessor Definitions" pontosvesszővel ellátott listába lehet makrókat definiálni.</p>
+<p><img alt="" src="../assets/vs/preprocessor-definitions.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
