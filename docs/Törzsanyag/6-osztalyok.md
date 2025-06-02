@@ -50,7 +50,7 @@ private: //ez után a következő access-specifier -ig minden private.
 int main(){
     Foo f;
     f.x = 5;
-    f.y = 2.3; //nem ok, y private
+    f.y = 2.3; //hiba, y private
 }
 ```
 
