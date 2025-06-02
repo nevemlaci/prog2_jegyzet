@@ -129,6 +129,7 @@ Megadja két `RandomAccessIterator` távolságát.
 std::vector<int> v{3, 1, 4};
 std::cout << "distance(first, last) = " << std::distance(v.begin(), v.end()) << '\n';
 ```
+![std::distance explanation](assets/algorithms/distance.png)
 
 #### std::for_each
 
@@ -167,6 +168,7 @@ int main(){
 }
 ```
 
+![std::for_each explanation](assets/algorithms/for_each.png)
 
 #### std::find, std::find_if
 
@@ -198,6 +200,8 @@ Az `std::find_if` 3. paraméterként egy érték helyett egy predikátumfüggvé
     }
 ```
 
+![std::find explanation](assets/algorithms/find.png)
+
 #### std::count és std::count_if
 
 `count(InputIt first, InputIt last, const T& value);`
@@ -222,6 +226,8 @@ int main(){
     std::cout << "\n2-vel oszthatoak szama: " << std::count_if(v.begin(), v.end(), divisibleBy2);
 }
 ```
+
+![std::find explanation](assets/algorithms/count.png)
 
 #### std::fill, std::generate
 
@@ -281,6 +287,8 @@ for(auto it = v.begin(), it != v.end(), ++it){
 }
 ```
 
+![std::generate explanation](assets/algorithms/generate.png)
+
 
 #### std::transform
 
@@ -320,29 +328,33 @@ int main(){
 }
 ```
 
-Az `std::transform`-nak létezik egy két range-n működő változata is:
+![std::transfrom explanation](assets/algorithms/transform.png)
 
-`OutputIt transform(InputIt1 first1, InputIt1 last1, InputIt2 first2, OutputIt d_first, BinaryOp binary_op);`
+??? note Két range-s `std::transform
 
-[ Futtasd! ](<https://godbolt.org/z/q96zb98Ea>){ .md-button target="_blank"}
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
+    Az `std::transform`-nak létezik egy két range-n működő változata is:
 
-int main(){
-    std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
-    std::vector<int> w = {2, 5, 1, 5, 0, 2, 9, 0, 10};
-    
-    std::vector<int> x(v.size());
+    `OutputIt transform(InputIt1 first1, InputIt1 last1, InputIt2 first2, OutputIt d_first, BinaryOp binary_op);`
 
-    //std::plus<T> : funktor aminek a fgv.hívás operátora összeadja a két operandust
-    std::transform(v.begin(), v.end(), w.begin(), x.begin(), std::plus<int>()/*default constructed std::plus instance*/);
-    for(int elem : x){
-        std::cout << elem << '\n';
+    [ Futtasd! ](<https://godbolt.org/z/q96zb98Ea>){ .md-button target="_blank"}
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+
+    int main(){
+        std::vector<int> v = {3, 2, 1, 5, 3, 2, 8, 3, 12};
+        std::vector<int> w = {2, 5, 1, 5, 0, 2, 9, 0, 10};
+        
+        std::vector<int> x(v.size());
+
+        //std::plus<T> : funktor aminek a fgv.hívás operátora összeadja a két operandust
+        std::transform(v.begin(), v.end(), w.begin(), x.begin(), std::plus<int>()/*default constructed std::plus instance*/);
+        for(int elem : x){
+            std::cout << elem << '\n';
+        }
     }
-}
-```
+    ```
 
 #### std::equal, std::mismatch
 
