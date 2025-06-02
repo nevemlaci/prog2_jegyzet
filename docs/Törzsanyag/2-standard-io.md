@@ -144,6 +144,7 @@ int main(){
 A manipulátorok hatóköre változó, vannak olyanok, amelyek csak a következő outputra hatnak, de vannak olyanok is, amelyek hatása "végtelen"(amíg meg nem változtatjuk).
 
 Fontosabb mainpulátorok:
+
 * `std::setw(size)` : megadja, hogy a számok hány karakter szélesek legyene
 * `std::setfill(ch)` : a paraméterként kapott karakterrel lesz kitöltve a maradék hely, ha egy kiírt érték nem tölti ki a megadott szélességet
 * `std::setprecision(p)` : a lebegőpontos számok tizedesjegyeinek pontosságát (számát) állítja be
