@@ -330,7 +330,7 @@ int main(){
 
 ![std::transfrom explanation](assets/algorithms/transform.png)
 
-??? note Két range-s `std::transform
+??? note "Két range-s `std::transform`"
 
     Az `std::transform`-nak létezik egy két range-n működő változata is:
 
