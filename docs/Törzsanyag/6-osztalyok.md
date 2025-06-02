@@ -13,7 +13,7 @@ struct foo {};
 
 void foo_szamol(struct foo* this) {}
 ```
-és társai. Jó lenne, ha a `foo_szamol` függvényt valahogyan a `foo` struktúrához köthetnénk. (A paraméter neve nem véletlenül `this` !)
+és társai. Jó lenne, ha a `foo_szamol` függvényt valahogyan a `foo` struktúrához köthetnénk. *(A paraméter neve nem véletlenül `this` !)*
 
 Osztály: állapot (state), valamint ezen az állapoton elvégzett műveletek.<br>
 
