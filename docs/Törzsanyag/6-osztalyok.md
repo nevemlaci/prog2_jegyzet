@@ -296,7 +296,7 @@ Most a tároló a hívó féltől már egy pointert kap, viszont **átveszi a fe
 Most pedig nézzünk egy komolyabb példát. 
 A tervünk egy dinamikusan növő tömb osztálysablon létrehozása egész számokat fog tárolni.
 
-[ Futtasd! ](<https://godbolt.org/z/Y6jW9xM63>){ .md-button target="_blank"}
+[ Futtasd! ](<https://godbolt.org/z/bjaW3fYqT>){ .md-button target="_blank"}
 ```cpp
 #include <cstddef> // std::size_t
 #include <stdexcept> // std::out_of_range
@@ -314,8 +314,9 @@ public:
     DinTomb() : tomb(nullptr), meret(0) {}
 
     /**
-     * @brief hozzáad egy új elemet a tömb végéhez. Nagyon hasonlít a C-ben megismert algoritmushoz, csak malloc-free helyett new-delete[] van
-     * @param elem az elem amit hozzáadunk(lemásolható kell, hogy legyen)
+     * @brief hozzáad egy új elemet a tömb végéhez. 
+     Nagyon hasonlít a C-ben megismert algoritmushoz, csak malloc-free helyett new-delete[] van
+     * @param elem az elem amit hozzáadunk
      */
     void push_back(int elem) {
         int* uj_tomb = new int[meret + 1];
@@ -451,13 +452,6 @@ class foo{
     }
 };
 ```
-
-!!! danger "Figyelem!"
-    
-    A template definíciókat (explicit specializációkat kivéve) header fileokban kell megírni!
-
-    A miértjéről az alábbi (egyébként szintén általam írt) rövid article-ben olvashattok:
-    [TCCPP Article](https://github.com/TCCPP/wiki/blob/60d51923ed1100c2ed76e68ece7f2a33db68bc46/articles/template-header.md)
 
 A .cpp fileban a `returntype classname::functionname(params...)` szintaktikát használjuk.<br>
 

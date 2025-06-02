@@ -30,6 +30,15 @@ void cpp_swap(T& x, T&y){ //cpp_swap<T> függvénysablon
 }
 ```
 
+!!! danger "Figyelem!"
+    
+    A template definíciókat (explicit specializációkat kivéve) header fileokban kell megírni!
+    Ez vonatkozik a függvénysablonokra és osztálysablonokra is.
+
+    A miértjéről az alábbi (egyébként szintén általam írt) rövid article-ben olvashattok:
+    [TCCPP Article](https://github.com/TCCPP/wiki/blob/60d51923ed1100c2ed76e68ece7f2a33db68bc46/articles/template-header.md)
+
+
 A fent látható `cpp_swap` -ot *függvénysablon*nak hívjuk. Önmagában nem függvény, ahhoz "példányosítani" kell. Ez a gyakorlatban annyit jelent, hogy használjuk.
 
 pl.
@@ -151,6 +160,89 @@ ezt **C**lass **T**emplate **A**rgument **D**eduction (CTAD) -nek nevezik.
     A CTAD kicsit máshogy működik, mint az általános, függvényekre vonatkozó TAD. 
     Akit érdekel, annak ajánlom [Nina Ranns cppcon előadását a témával kapcsolatban](https://www.youtube.com/watch?v=pcroTezEbX8).
 
+
+### Dinamikus tömb átírása template-re
+
+!!! note
+
+    Mivel az egész tömb egy osztálysablon lesz, így ez az egész header fileba fog kerülni.
+
+Igazából ez nem egy bonyolult folyamat. Mindenhol, ahol az `int` mint tárolt típus szerepel, ott lecseréltük `T` -re.
+
+!!! note
+    Az új verzióban `const T&` -t veszünk át beillesztésnél.
+    Egész számot olcsó volt másolni, de itt már nem ismerjük a típust.
+
+```cpp
+#include <cstddef> // std::size_t
+#include <stdexcept> // std::out_of_range
+#include <iostream> // std::cout
+
+
+template<typename T>
+class DinTomb{
+    T* tomb; //pointer a dinamikus tömbre
+    std::size_t meret; //a dinamikus tömb mérete
+
+public:
+    /**
+     * @brief Default konstruktor, mindent 0-ra inicializál
+     */
+    DinTomb() : tomb(nullptr), meret(0) {}
+
+    /**
+     * @brief hozzáad egy új elemet a tömb végéhez. Nagyon hasonlít a C-ben megismert algoritmushoz, csak malloc-free helyett new-delete[] van
+     * @param elem az elem amit hozzáadunk(lemásolható kell, hogy legyen)
+     */
+    void push_back(const T& elem) {
+        T* uj_tomb = new T[meret + 1];
+        for(std::size_t i = 0; i < meret; ++i){
+            uj_tomb[i] = tomb[i];
+        }
+        uj_tomb[meret] = elem;
+        delete[] tomb; // delete[], mert tömböt szabadítunk fel.
+        tomb = uj_tomb;
+        ++meret;
+    }
+
+    std::size_t size() const { return meret; }
+
+    /**
+     * @brief indexelő függvény
+     * @param idx
+     * @return referencia az adott indexen lévő elemre
+     * @throw std::out_of_range, ha túlindexelés történik
+     */
+    T& at(std::size_t idx) {
+        if(idx >= meret) {
+            throw std::out_of_range("Tomb tulindexelve!");
+        }
+        return tomb[idx];
+    }
+
+    //ua. mint az előbb, csak konstans verzió
+    const T& at(std::size_t idx) const { 
+        if(idx >= meret) {
+            throw std::out_of_range("Tomb tulindexelve!");
+        }
+        return tomb[idx];
+    }
+
+    ~DinTomb() {
+        delete[] tomb; //destruktor felszabadítja a lefoglalt memóriát
+    }
+};
+
+int main(){
+    DinTomb<double> tomb; // így már megy double-ra is :D
+
+    tomb.push_back(4.2);
+    tomb.push_back(3.5);
+    tomb.at(0) = 5.1; 
+    std::cout << tomb.at(1);
+    return 0; 
+}
+```
 
 ## Nem-típus sablonparaméterek
 
