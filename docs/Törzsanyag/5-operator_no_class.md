@@ -15,7 +15,7 @@ struct Komplex{
 };
 ```
 
-Két komplex számot szeretnénk a `+` operátorral felülírni. Ehhez az `operator+` függvényt kell túlterhelni úgy, hogy az egy komplex számot adjon vissza és két komplex számot kapjon paraméterként, pl. `Komplex operator+(const Komplex&, const Komplex&)` :
+Két komplex számot szeretnénk a `+` operátorral összeadni, majd az eredményt visszaadni. Ehhez az `operator+` függvényt kell túlterhelni úgy, hogy az egy komplex számot adjon vissza és két komplex számot kapjon paraméterként, pl. `Komplex operator+(const Komplex&, const Komplex&)` :
 
 [ Futtasd! ](<https://godbolt.org/z/dexTfaWG3>){ .md-button target="_blank"}
 ```cpp
